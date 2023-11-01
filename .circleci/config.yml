@@ -1,0 +1,21 @@
+version: 2.1
+
+jobs:
+  echo_tag:
+    docker:
+      - image: cimg/base:2023.10
+    steps:
+      - run:
+          name: Echo tag name
+          command: |
+            echo "Tag name is: ${CIRCLE_TAG}"
+
+workflows:
+  build:
+    jobs:
+      - echo_tag:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/
